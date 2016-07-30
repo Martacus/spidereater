@@ -1,0 +1,13 @@
+#gracious{
+      background-color: white;
+}
+
+#wrapper {
+    text-align: center;
+    background-color: white;
+}
+
+#spiderDiv{
+  position: absolute;
+  left: 45%;
+}
