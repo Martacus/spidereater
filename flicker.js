@@ -42,12 +42,13 @@ function error(err) {
 $( document ).ready(function() {
 var options = {
   enableHighAccuracy: true,
-  timeout: 2000,
+  timeout: 5000,
   maximumAge: 0
 };
 navigator.geolocation.getCurrentPosition(success, error, options);
 $.getJSON('https://maps.googleapis.com/maps/api/geocode/json?latlng='+  lat + ',' + long + '&sensor=true', function(data){
   name = data.results[1].address_components[1].short_name;
+  console.log(JSON.stringify(data));
   console.log(name);
 })
 });
