@@ -3,11 +3,18 @@
 }
 
 #wrapper {
+  margin-top: 100px;
     text-align: center;
     background-color: white;
 }
 
 #spiderDiv{
-  position: absolute;
-  left: 45%;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+#clickButton{
+  margin-top: 20px;
+  background: #E83131;
+  border-radius: 24px;
 }
