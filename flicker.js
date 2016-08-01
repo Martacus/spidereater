@@ -2,13 +2,7 @@ var long;
 var lat;
 var name;
 
-geolocator.config({
-    language: "en",
-    google: {
-        version: "3",
-        key: "AIzaSyBWvBXCZcG4pw_sX3tlGQVXQwXO9i0eFgM"
-    }
-});
+
 
 function calcSpider(){
   var age = $("#textField").val();
@@ -32,22 +26,41 @@ function prng(seed, bottom = 0, top = 1) {
     return (bottom+((top-bottom)*seed/(233280)));
 }
 
+function success(pos) {
+  var crd = pos.coords;
 
+  console.log('Your current position is:');
+  console.log('Latitude : ' + crd.latitude);
+  console.log('Longitude: ' + crd.longitude);
+  console.log('More or less ' + crd.accuracy + ' meters.');
+};
+
+function error(err) {
+  console.warn('ERROR(' + err.code + '): ' + err.message);
+};
 
 
 $( document ).ready(function() {
-  var options = {
-            enableHighAccuracy: true,
-            timeout: 6000,
-            maximumAge: 0,
-            desiredAccuracy: 30,
-            fallbackToIP: true, // fallback to IP if Geolocation fails or rejected
-            addressLookup: true,
-            timezone: true,
-            map: "map-canvas"
-        };
-        geolocator.locate(options, function (err, location) {
-            if (err) return console.log(err);
-            console.log(location);
-        });
+  if ("geolocation" in navigator) {
+    console.log("A");
+    navigator.geolocation.getCurrentPosition(function(position) {
+      long = position.coords.longitude;
+      lat = position.coords.latitude;
+      console.log(long);
+      console.log(lat);
+    });
+  } else {
+    console.log("v");/* geolocation IS NOT available */
+}
+
+var options = {
+  enableHighAccuracy: true,
+  timeout: 5000,
+  maximumAge: 0
+};
+
+
+
+navigator.geolocation.getCurrentPosition(success, error, options);
+
 });
