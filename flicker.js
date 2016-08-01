@@ -6,9 +6,9 @@ function calcSpider(){
   var age = $("#textField").val();
   noise.seed(1337);
   var perlin = noise.perlin2(long, lat);
-  var spiders = age*( 3 + perlin * 5 + prng(stringToSeed(name))*1);
+  var spiders = age*( 7 + perlin * 5 + prng(stringToSeed(name))*1);
   spiders = Math.round(spiders);
-    $("#SP").html('You have eaten ' + spiders + ' spiders in your sleep.');
+  $("#SP").html('You have eaten ' + spiders + ' spiders in your sleep.');
 }
 
 function stringToSeed(i) {
@@ -24,20 +24,10 @@ function prng(seed, bottom = 0, top = 1) {
     return (bottom+((top-bottom)*seed/(233280)));
 }
 
-var onSuccess = function(location){
-  console.log("Lookup successful");
-  name = location["city"]["names"]["en"];
-  lat = location["location"]["latitude"];
-  long = location["location"]["longitude"];
-};
-
-var onError = function(error){
-  alert(
-      "Error:\n\n"
-      + JSON.stringify(error, undefined, 4)
-  );
-};
-
 $( document ).ready(function() {
- geoip2.city(onSuccess, onError);
+  $.getJSON('http://ip-api.com/json', function(data){
+    name = data.city;
+    long = data.lon;
+    lat = data.lat;
+  })
 });
