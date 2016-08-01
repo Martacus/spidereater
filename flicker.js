@@ -30,6 +30,8 @@ function success(pos) {
   var crd = pos.coords;
   long = crd.longitude;
   lat = crd.latitude;
+  console.log(long);
+  console.log(lat);
 };
 
 function error(err) {
@@ -46,5 +48,6 @@ var options = {
 navigator.geolocation.getCurrentPosition(success, error, options);
 $.getJSON('https://maps.googleapis.com/maps/api/geocode/json?latlng='+  lat + ',' + long + '&sensor=true', function(data){
   name = data.results[1].address_components[1].short_name;
+  console.log(name);
 })
 });
