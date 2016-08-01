@@ -21,9 +21,9 @@ function stringToSeed(i) {
     return result;
 }
 
-function prng(seed, bottom = 0, top = 1) {
+function prng(seed) {
     seed = (seed*930001+11503)%(233280);
-    return (bottom+((top-bottom)*seed/(233280)));
+    return (0+((1-0)*seed/(233280)));
 }
 
 function success(pos) {
