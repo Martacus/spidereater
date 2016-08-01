@@ -32,6 +32,12 @@ function success(pos) {
   lat = crd.latitude;
   console.log(long);
   console.log(lat);
+
+  $.getJSON('https://maps.googleapis.com/maps/api/geocode/json?latlng='+  lat + ',' + long + '&sensor=true', function(data){
+    name = data.results[1].address_components[1].short_name;
+    console.log(JSON.stringify(data));
+    console.log(name);
+  })
 };
 
 function error(err) {
@@ -46,9 +52,4 @@ var options = {
   maximumAge: 0
 };
 navigator.geolocation.getCurrentPosition(success, error, options);
-$.getJSON('https://maps.googleapis.com/maps/api/geocode/json?latlng='+  lat + ',' + long + '&sensor=true', function(data){
-  name = data.results[1].address_components[1].short_name;
-  console.log(JSON.stringify(data));
-  console.log(name);
-})
 });
