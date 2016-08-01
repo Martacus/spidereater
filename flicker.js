@@ -46,6 +46,7 @@ function error(err) {
 
 
 $( document ).ready(function() {
+  alert("Please enable the acces to your location, if you dont it wont work! Locations arent saved.");
 var options = {
   enableHighAccuracy: true,
   timeout: 5000,
