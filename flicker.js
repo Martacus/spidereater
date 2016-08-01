@@ -28,11 +28,8 @@ function prng(seed, bottom = 0, top = 1) {
 
 function success(pos) {
   var crd = pos.coords;
-
-  console.log('Your current position is:');
-  console.log('Latitude : ' + crd.latitude);
-  console.log('Longitude: ' + crd.longitude);
-  console.log('More or less ' + crd.accuracy + ' meters.');
+  long = crd.longitude;
+  lat = crd.latitude;
 };
 
 function error(err) {
@@ -41,26 +38,13 @@ function error(err) {
 
 
 $( document ).ready(function() {
-  if ("geolocation" in navigator) {
-    console.log("A");
-    navigator.geolocation.getCurrentPosition(function(position) {
-      long = position.coords.longitude;
-      lat = position.coords.latitude;
-      console.log(long);
-      console.log(lat);
-    });
-  } else {
-    console.log("v");/* geolocation IS NOT available */
-}
-
 var options = {
   enableHighAccuracy: true,
-  timeout: 5000,
+  timeout: 2000,
   maximumAge: 0
 };
-
-
-
 navigator.geolocation.getCurrentPosition(success, error, options);
-
+$.getJSON('http://maps.googleapis.com/maps/api/geocode/json?latlng='+  lat + ',' + long + '&sensor=true', function(data){
+  name = data.results[1].address_components[1].short_name;
+})
 });
