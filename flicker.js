@@ -2,13 +2,15 @@ var long;
 var lat;
 var name;
 
+
+
 function calcSpider(){
   var age = $("#textField").val();
   noise.seed(1337);
   var perlin = noise.perlin2(long, lat);
-  var spiders = age*( 3 + perlin * 5 + prng(stringToSeed(name))*1);
+  var spiders = age*( 7 + perlin * 5 + prng(stringToSeed(name))*1);
   spiders = Math.round(spiders);
-    $("#SP").html('You have eaten ' + spiders + ' spiders in your sleep.');
+  $("#SP").html('You have eaten ' + spiders + ' spiders in your sleep.');
 }
 
 function stringToSeed(i) {
@@ -19,25 +21,30 @@ function stringToSeed(i) {
     return result;
 }
 
-function prng(seed, bottom = 0, top = 1) {
+function prng(seed) {
     seed = (seed*930001+11503)%(233280);
-    return (bottom+((top-bottom)*seed/(233280)));
+    return (0+((1-0)*seed/(233280)));
 }
 
-var onSuccess = function(location){
-  console.log("Lookup successful");
-  name = location["city"]["names"]["en"];
-  lat = location["location"]["latitude"];
-  long = location["location"]["longitude"];
+function success(pos) {
+  var crd = pos.coords;
+  long = crd.longitude;
+  lat = crd.latitude;
 };
 
-var onError = function(error){
-  alert(
-      "Error:\n\n"
-      + JSON.stringify(error, undefined, 4)
-  );
+function error(err) {
+  console.warn('ERROR(' + err.code + '): ' + err.message);
 };
+
 
 $( document ).ready(function() {
- geoip2.city(onSuccess, onError);
+var options = {
+  enableHighAccuracy: true,
+  timeout: 2000,
+  maximumAge: 0
+};
+navigator.geolocation.getCurrentPosition(success, error, options);
+$.getJSON('http://maps.googleapis.com/maps/api/geocode/json?latlng='+  lat + ',' + long + '&sensor=true', function(data){
+  name = data.results[1].address_components[1].short_name;
+})
 });
