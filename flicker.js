@@ -2,6 +2,14 @@ var long;
 var lat;
 var name;
 
+geolocator.config({
+    language: "en",
+    google: {
+        version: "3",
+        key: "AIzaSyBWvBXCZcG4pw_sX3tlGQVXQwXO9i0eFgM"
+    }
+});
+
 function calcSpider(){
   var age = $("#textField").val();
   noise.seed(1337);
@@ -24,10 +32,22 @@ function prng(seed, bottom = 0, top = 1) {
     return (bottom+((top-bottom)*seed/(233280)));
 }
 
+
+
+
 $( document ).ready(function() {
-  $.getJSON('http://ip-api.com/json', function(data){
-    name = data.city;
-    long = data.lon;
-    lat = data.lat;
-  })
+  var options = {
+            enableHighAccuracy: true,
+            timeout: 6000,
+            maximumAge: 0,
+            desiredAccuracy: 30,
+            fallbackToIP: true, // fallback to IP if Geolocation fails or rejected
+            addressLookup: true,
+            timezone: true,
+            map: "map-canvas"
+        };
+        geolocator.locate(options, function (err, location) {
+            if (err) return console.log(err);
+            console.log(location);
+        });
 });
