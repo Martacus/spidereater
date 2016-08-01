@@ -2,6 +2,11 @@
       background-color: white;
 }
 
+#popup{
+  text-align: center;
+  font-size: 8px;
+}
+
 #wrapper {
   margin-top: 100px;
     text-align: center;
