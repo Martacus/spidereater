@@ -15,12 +15,14 @@
 
 <body id="gracious">
   <div id="wrapper">
-
     <h1>Always wanted to know how many spiders you ate?</h1>
-    <form>
-      <h2>Age</h2>
-      <input id="textField" type="text" name="age"><br>
-    </form>
+    <div id="Labels">
+      <label for=''> City(If you did not enable GeoLocation acces)</label>
+      <input id = "cityLabel" class="form-control" type='text', placeholder='City' name="city") />
+
+      <label for=''> Age</label>
+      <input id = "ageLabel" class="form-control" type='text', placeholder='Age' name="age") />
+    </div>
     <div id="buttonDiv">
       <button class="btn" id="clickButton" onclick="calcSpider();">Calculate</button>
     </div>

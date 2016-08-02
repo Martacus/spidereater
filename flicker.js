@@ -2,16 +2,50 @@ var long;
 var lat;
 var name;
 
-
+var geo = false;
 
 function calcSpider(){
-  var age = $("#textField").val();
+  var age = $("#ageLabel").val();
+  name = $("#cityLabel").val();
   noise.seed(1337);
   var perlin = noise.perlin2(long, lat);
   var spiders = age*( 7 + perlin * 5 + prng(stringToSeed(name))*1);
   spiders = Math.round(spiders);
   $("#SP").html('You have eaten ' + spiders + ' spiders in your sleep.');
 }
+
+function success(pos) {
+  var crd = pos.coords;
+  long = crd.longitude;
+  lat = crd.latitude;
+  geo = true;
+
+  $.getJSON('https://maps.googleapis.com/maps/api/geocode/json?latlng='+  lat + ',' + long + '&sensor=true', function(data){
+    name = data.results[1].address_components[1].short_name;
+  })
+};
+
+function error(err) {
+  if (err.code == err.PERMISSION_DENIED) {
+    long = 1;
+    lat = 1;
+  }else{
+      console.warn('ERROR(' + err.code + '): ' + err.message);
+  }
+};
+
+
+$( document ).ready(function() {
+  alert("Please enable the acces to your location, if you dont you will need to fill in your city!");
+var options = {
+  enableHighAccuracy: true,
+  timeout: 5000,
+  maximumAge: 0
+};
+navigator.geolocation.getCurrentPosition(success, error, options);
+});
+
+////////////////////////////////////////////
 
 function stringToSeed(i) {
     var result = 0;
@@ -25,32 +59,3 @@ function prng(seed) {
     seed = (seed*930001+11503)%(233280);
     return (0+((1-0)*seed/(233280)));
 }
-
-function success(pos) {
-  var crd = pos.coords;
-  long = crd.longitude;
-  lat = crd.latitude;
-  console.log(long);
-  console.log(lat);
-
-  $.getJSON('https://maps.googleapis.com/maps/api/geocode/json?latlng='+  lat + ',' + long + '&sensor=true', function(data){
-    name = data.results[1].address_components[1].short_name;
-    console.log(JSON.stringify(data));
-    console.log(name);
-  })
-};
-
-function error(err) {
-  console.warn('ERROR(' + err.code + '): ' + err.message);
-};
-
-
-$( document ).ready(function() {
-  alert("Please enable the acces to your location, if you dont it wont work! Locations arent saved.");
-var options = {
-  enableHighAccuracy: true,
-  timeout: 5000,
-  maximumAge: 0
-};
-navigator.geolocation.getCurrentPosition(success, error, options);
-});
