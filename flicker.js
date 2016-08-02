@@ -16,6 +16,10 @@ function calcSpider(){
   }
   noise.seed(1337);
 
+  if($("#ageLabel").val() === ""){
+    alert("No age filled in");
+    return;
+  }
   var age = $("#ageLabel").val();
   var perlin = noise.perlin2(long, lat);
   var spiders = age*( 7 + perlin * 5 + prng(stringToSeed(name))*1); spiders = Math.round(spiders);
@@ -31,6 +35,7 @@ function success(pos) {
 
   $.getJSON('https://maps.googleapis.com/maps/api/geocode/json?latlng='+  lat + ',' + long + '&sensor=true', function(data){
     name = data.results[1].address_components[1].short_name;
+    $("#cityLabel").val(name);
   })
 };
 
