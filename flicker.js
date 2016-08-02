@@ -5,12 +5,21 @@ var name;
 var geo = false;
 
 function calcSpider(){
-  var age = $("#ageLabel").val();
-  name = $("#cityLabel").val();
+  if(geo === false){
+    if($("#cityLabel").val() === ""){
+      alert("Please fill in city");
+      return;
+    }
+    else{
+      name = $("#cityLabel").val();
+    }
+  }
   noise.seed(1337);
+
+  var age = $("#ageLabel").val();
   var perlin = noise.perlin2(long, lat);
-  var spiders = age*( 7 + perlin * 5 + prng(stringToSeed(name))*1);
-  spiders = Math.round(spiders);
+  var spiders = age*( 7 + perlin * 5 + prng(stringToSeed(name))*1); spiders = Math.round(spiders);
+
   $("#SP").html('You have eaten ' + spiders + ' spiders in your sleep.');
 }
 
