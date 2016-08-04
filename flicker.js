@@ -1,6 +1,7 @@
 var long;
 var lat;
 var name;
+var spiders;
 
 var geo = false;
 
@@ -22,9 +23,30 @@ function calcSpider(){
   }
   var age = $("#ageLabel").val();
   var perlin = noise.perlin2(long, lat);
-  var spiders = age*( 7 + perlin * 5 + prng(stringToSeed(name))*1); spiders = Math.round(spiders);
+  spiders = age*( 7 + perlin * 5 + prng(stringToSeed(name))*1); spiders = Math.round(spiders);
+  type($("#SP"), 'Did you know you eat around 7 spiders a year while you sleep? With my awesome calculations ive come to a conclusion. ', 0);
 
-  $("#SP").html('You have eaten ' + spiders + ' spiders in your sleep.');
+  setTimeout(displaySpoder, 3000)
+  //$("#SP").html('Did you know you eat around 7 spiders a year while you sleep? With my awesome calculations ive come to a conclusion. <br>You have eaten ' + spiders + ' spiders in your sleep.');
+}
+
+function displaySpoder(){
+  type($("#SP2"), '\n You have eaten ' + spiders + ' spiders in your sleep.', 0);
+  $('.twitter-share-button').attr('data-text', 'I\'ve eaten '+ spiders + ' spiders in my sleep! How many have you eaten?');
+
+  $('#spiderDiv iframe').remove();
+  // Generate new markup
+  var tweetBtn = $('<a></a>')
+      .addClass('twitter-share-button')
+      .attr('href', 'http://twitter.com/share')
+      .attr('data-url', 'https://martacus.github.io/spidereater')
+      .attr('data-hashtags', 'spidercalc')
+      .attr('data-related', 'Zanzlanz , BMartacus')
+      .attr('data-show-count', 'true')
+      .attr('data-text', 'I\'ve eaten '+ spiders + ' spiders in my sleep! How many have you eaten?');
+  $('#spiderDiv').append(tweetBtn);
+  twttr.widgets.load();
+
 }
 
 function success(pos) {
@@ -50,7 +72,7 @@ function error(err) {
 
 
 $( document ).ready(function() {
-  alert("Please enable the acces to your location, if you dont you will need to fill in your city!");
+  $("#ageLabel").numeric();
 var options = {
   enableHighAccuracy: true,
   timeout: 5000,
@@ -72,4 +94,12 @@ function stringToSeed(i) {
 function prng(seed) {
     seed = (seed*930001+11503)%(233280);
     return (0+((1-0)*seed/(233280)));
+}
+
+function type($el, text, position) {
+
+	if (text.length >= position) {
+			$el.text(text.substring(0, position));
+			setTimeout(function() { type($el, text, position + 1); }, 10)
+	}
 }

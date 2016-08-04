@@ -1,12 +1,31 @@
+@font-face {
+    font-family: 'SiteFont'; /*a name to be used later*/
+    src: url('Sintony-Regular.otf'); /*URL to font*/
+}
+
+html, body {
+  height: 100%;
+}
+
 #gracious{
-      background-color: white;
-      background-image: url('spider.jpg');
-      color: black;
+  height: 100%;
+  width: 100%;
+  display: table;
+  font-family: 'SiteFont';
+  background: url('spider.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  color: white;
 }
 
 #wrapper {
-  margin-top: 100px;
-    text-align: center;
+  margin: auto;
+  text-align: center;
+  display: table-cell;
+  height: 100%;
+  vertical-align: middle;
 }
 
 
@@ -22,8 +41,9 @@
   color: white;
 }
 
-#Labels{
+#Formdiv{
   margin: auto;
+  margin-top: 70px;
   width: 30%;
-  text-align: center;
+  text-align: left;
 }
