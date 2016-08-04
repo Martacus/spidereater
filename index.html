@@ -2,33 +2,53 @@
 <html lang="en">
 
 <head>
+
+
   <link href="flicker.css" rel="stylesheet">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
   <script src="jquery-3.1.0.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/geolocator/2.0.0/geolocator.min.js"></script>
-  <script src="perlin.js" type="text/javascript"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src="perlin.js" type="text/javascript"></script>
+  <script src="numeric.js" type="text/javascript"></script>
+
 
   <title>Spider Eater</title>
 </head>
 
 <body id="gracious">
-  <p id = "popup">
-    If you want to use this application accept the location service that will popup right about now silly, thanks xx
-  </p>
   <div id="wrapper">
-
     <h1>Always wanted to know how many spiders you ate?</h1>
-    <form>
-      <h2>Age</h2>
-      <input id="textField" type="text" name="age"><br>
-    </form>
+    <div id="Formdiv">
+      <label for=''> Age</label>
+      <input id = "ageLabel" class="form-control" type='number', placeholder='Example: 15' name="age" />
+      <br><br>
+      <label for=''> City</label>
+      <input id = "textLabel" class="form-control" type='text', placeholder='Example: New York' name="city" />
+    </div>
     <div id="buttonDiv">
       <button class="btn" id="clickButton" onclick="calcSpider();">Calculate</button>
     </div>
     <div id="spiderDiv">
       <p id="SP"></p>
+      <p id="SP2"></p>
+      <script>window.twttr = (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0],
+        t = window.twttr || {};
+      if (d.getElementById(id)) return t;
+      js = d.createElement(s);
+      js.id = id;
+      js.src = "https://platform.twitter.com/widgets.js";
+      fjs.parentNode.insertBefore(js, fjs);
+
+      t._e = [];
+      t.ready = function(f) {
+        t._e.push(f);
+      };
+
+      return t;
+    }(document, "script", "twitter-wjs"));</script>
     </div>
   </div>
 
