@@ -29,7 +29,7 @@ function calcSpider(){
   var perlin = noise.perlin2(long/100, lat/100);
   yearly = (7 + perlin*3 + cityAddition);
   spiders = Math.round(age*yearly);
-  type($("#SP"), 'Based on your age and location, SpiderCalculator comes to the conclusion:', 0);
+  type($("#SP"), 'Based on your age and location, Spider Calculator comes to the conclusion:', 0);
 
   setTimeout(displaySpoder, 3000)
   //$("#SP").html('Did you know you eat around 7 spiders a year while you sleep? With my awesome calculations ive come to a conclusion. <br>You have eaten ' + spiders + ' spiders in your sleep.');
@@ -46,7 +46,7 @@ function displaySpoder(){
   var tweetBtn = $('<a></a>')
       .addClass('twitter-share-button')
       .attr('href', 'http://twitter.com/share')
-      .attr('data-url', 'https://martacus.github.io/spidereater')
+      .attr('data-url', 'http://SpiderCalculator.com')
       .attr('data-hashtags', 'SpiderCalculator')
       .attr('data-related', 'BMartacus, Zanzlanz')
       .attr('data-show-count', 'true')
