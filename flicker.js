@@ -34,7 +34,7 @@ function calcSpider(){
 }
 
 function displaySpoder(){
-  type($("#SP2"), '\nOn average, you eat over <b>' + Math.floor(yearly) + ' spider' + (yearly>1?"s":"") + '</b> every year! You have eaten <b>' + spiders + ' spider' + (spiders>1?"s":"") + '</b> in your sleep.', 0);
+  type($("#SP2"), '\nOn average, you eat over ' + Math.floor(yearly) + ' spider' + (yearly>1?"s":"") + ' every year! You have eaten ' + spiders + ' spider' + (spiders>1?"s":"") + ' in your sleep.', 0);
   
   var tweetText = 'I\'ve eaten '+ spiders + ' spider' + (spiders>1?"s":"") + ' in my sleep! How many have you eaten? #SpiderCalculator\n';
   $('.twitter-share-button').attr('data-text', tweetText);
