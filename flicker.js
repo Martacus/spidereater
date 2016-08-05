@@ -27,7 +27,6 @@ function calcSpider(){
   }
   
   var perlin = noise.perlin2(long/100, lat/100);
-  alert(name +", "+ stringToSeed(name) +", "+ (perlin*3) +", "+ cityAddition);
   yearly = (7 + perlin*3 + cityAddition);
   spiders = Math.round(age*yearly);
   type($("#SP"), 'Based on your age and location, SpiderCalculator comes to the conclusion:', 0);
