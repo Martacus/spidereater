@@ -38,7 +38,7 @@ function calcSpider(){
 function displaySpoder(){
   type($("#SP2"), '\nOn average, you eat over ' + Math.floor(yearly*10)/10 + ' spider' + (yearly!=1?"s":"") + ' every year! You have eaten ' + spiders + ' spider' + (spiders>1?"s":"") + ' in your sleep.', 0);
   
-  var tweetText = 'I\'ve eaten '+ spiders + ' spider' + (spiders>1?"s":"") + ' in my sleep! How many have you eaten? #SpiderCalculator\n';
+  var tweetText = 'I\'ve eaten '+ spiders + ' spider' + (spiders>1?"s":"") + ' in my sleep! How many have you eaten?\n';
   $('.twitter-share-button').attr('data-text', tweetText);
 
   $('#spiderDiv iframe').remove();
@@ -47,7 +47,7 @@ function displaySpoder(){
       .addClass('twitter-share-button')
       .attr('href', 'http://twitter.com/share')
       .attr('data-url', 'https://martacus.github.io/spidereater')
-      .attr('data-hashtags', 'spidercalc')
+      .attr('data-hashtags', 'SpiderCalculator')
       .attr('data-related', 'BMartacus, Zanzlanz')
       .attr('data-show-count', 'true')
       .attr('data-text', tweetText);
