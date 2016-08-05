@@ -7,13 +7,15 @@ var spiders;
 var geo = false;
 
 function calcSpider(){
+	var cityAddition = 0;
   if(geo === false){
     long = lat = 0;
-    if($("#cityLabel").val() == ""){
+    if($("#textLabel").val() == ""){
       alert("Please fill in city");
       return;
     } else {
-      name = $("#cityLabel").val();
+      name = $("#textLabel").val().toLowerCase();
+	  cityAddition = prng(stringToSeed(name)-.5)*2*3;
     }
   }
   noise.seed(1337);
@@ -24,8 +26,9 @@ function calcSpider(){
     return;
   }
   
-  var perlin = noise.perlin2(long, lat);
-  yearly = (7 + perlin * 5 + prng(stringToSeed(name))*1);
+  var perlin = noise.perlin2(long/100, lat/100);
+  alert(name +", "+ stringToSeed(name) +", "+ (perlin*3) +", "+ cityAddition);
+  yearly = (7 + perlin*3 + cityAddition);
   spiders = Math.round(age*yearly);
   type($("#SP"), 'Based on your age and location, SpiderCalculator comes to the conclusion:', 0);
 
@@ -34,7 +37,7 @@ function calcSpider(){
 }
 
 function displaySpoder(){
-  type($("#SP2"), '\nOn average, you eat over ' + Math.floor(yearly) + ' spider' + (yearly>1?"s":"") + ' every year! You have eaten ' + spiders + ' spider' + (spiders>1?"s":"") + ' in your sleep.', 0);
+  type($("#SP2"), '\nOn average, you eat over ' + Math.floor(yearly*10)/10 + ' spider' + (yearly!=1?"s":"") + ' every year! You have eaten ' + spiders + ' spider' + (spiders>1?"s":"") + ' in your sleep.', 0);
   
   var tweetText = 'I\'ve eaten '+ spiders + ' spider' + (spiders>1?"s":"") + ' in my sleep! How many have you eaten? #SpiderCalculator\n';
   $('.twitter-share-button').attr('data-text', tweetText);
@@ -98,7 +101,7 @@ function stringToSeed(i) {
 
 function prng(seed) {
     seed = (seed*930001+11503)%(233280);
-    return (0+((1-0)*seed/(233280)));
+    return (seed/233280);
 }
 
 function type($el, text, position) {
