@@ -21,11 +21,11 @@
   <div id="wrapper">
     <h1>Always wanted to know how many spiders you ate?</h1>
     <div id="Formdiv">
-      <label for=''> Age</label>
-      <input id = "ageLabel" class="form-control" type='number', placeholder='Example: 15' name="age" />
+      <label> Age</label>
+      <input id = "ageLabel" class="form-control" type='number' min='1' max='200' placeholder='Example: 15' name="age" />
       <br><br>
-      <label for=''> City</label>
-      <input id = "textLabel" class="form-control" type='text', placeholder='Example: New York' name="city" />
+      <label> City</label>
+      <input id = "textLabel" class="form-control" type='text' placeholder='Example: New York' name="city" />
     </div>
     <div id="buttonDiv">
       <button class="btn" id="clickButton" onclick="calcSpider();">Calculate</button>
@@ -48,7 +48,11 @@
       };
 
       return t;
-    }(document, "script", "twitter-wjs"));</script>
+    }(document, "script", "twitter-wjs"));
+    $(document).keypress(function(e) {
+      if(e.which == 13) calcSpider();
+    });
+    </script>
     </div>
   </div>
 
