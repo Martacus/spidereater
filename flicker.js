@@ -1,38 +1,43 @@
-var long;
-var lat;
+var long = 0;
+var lat = 0;
 var name;
+var yearly;
 var spiders;
 
 var geo = false;
 
 function calcSpider(){
   if(geo === false){
-    if($("#cityLabel").val() === ""){
+    long = lat = 0;
+    if($("#cityLabel").val() == ""){
       alert("Please fill in city");
       return;
-    }
-    else{
+    } else {
       name = $("#cityLabel").val();
     }
   }
   noise.seed(1337);
 
-  if($("#ageLabel").val() === ""){
-    alert("No age filled in");
+  var age = $("#ageLabel").val();
+  if(isNaN(age) || age <= 0 || age >= 200){
+    alert("Please enter a number for your age");
     return;
   }
-  var age = $("#ageLabel").val();
+  
   var perlin = noise.perlin2(long, lat);
-  spiders = age*( 7 + perlin * 5 + prng(stringToSeed(name))*1); spiders = Math.round(spiders);
-  type($("#SP"), 'Did you know you eat around 7 spiders a year while you sleep? With my awesome calculations ive come to a conclusion. ', 0);
+  yearly = (7 + perlin * 5 + prng(stringToSeed(name))*1);
+  spiders = Math.round(age*yearly);
+  type($("#SP"), 'Based on your age and location, SpiderCalculator comes to the conclusion:', 0);
 
   setTimeout(displaySpoder, 3000)
   //$("#SP").html('Did you know you eat around 7 spiders a year while you sleep? With my awesome calculations ive come to a conclusion. <br>You have eaten ' + spiders + ' spiders in your sleep.');
 }
 
 function displaySpoder(){
-  type($("#SP2"), '\n You have eaten ' + spiders + ' spiders in your sleep.', 0);
-  $('.twitter-share-button').attr('data-text', 'I\'ve eaten '+ spiders + ' spiders in my sleep! How many have you eaten?');
+  type($("#SP2"), '\nOn average, you eat over <b>' + Math.floor(yearly) + ' spider' + (yearly>1?"s":"") + '</b> every year! You have eaten <b>' + spiders + ' spider' + (spiders>1?"s":"") + '</b> in your sleep.', 0);
+  
+  var tweetText = 'I\'ve eaten '+ spiders + ' spider' + (spiders>1?"s":"") + ' in my sleep! How many have you eaten? #SpiderCalculator\n';
+  $('.twitter-share-button').attr('data-text', tweetText);
 
   $('#spiderDiv iframe').remove();
   // Generate new markup
@@ -41,9 +46,9 @@ function displaySpoder(){
       .attr('href', 'http://twitter.com/share')
       .attr('data-url', 'https://martacus.github.io/spidereater')
       .attr('data-hashtags', 'spidercalc')
-      .attr('data-related', 'Zanzlanz , BMartacus')
+      .attr('data-related', 'BMartacus, Zanzlanz')
       .attr('data-show-count', 'true')
-      .attr('data-text', 'I\'ve eaten '+ spiders + ' spiders in my sleep! How many have you eaten?');
+      .attr('data-text', tweetText);
   $('#spiderDiv').append(tweetBtn);
   twttr.widgets.load();
 
